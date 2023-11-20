@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Project;
-
+use App\Http\Controllers\API\ProjectController;
+use App\Http\Controllers\API\TypeController;
+use App\Http\Controllers\API\TechnologyController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,24 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('project', function () {
-    return response()->json([
-        'success' => true,
-        'result' => Project::with('type', 'technologies')->orderByDesc('id')->paginate(12)
-    ]);
-});
+Route::get('project', [ProjectController::class,'index']);
+Route::get('project/latest',[ProjectController::class, 'latest' ]);
+Route::get('project/{project:slug}', [ProjectController::class, 'show']);
 
-Route::get('type', function () {
-    return response()->json([
-        'status' => 'success',
-        'result' => App\Models\Type::all()
-    ]);
-});
+Route::get('type',[TypeController::class, 'index']);
+
+Route::get('technology',[TechnologyController::class, 'index']);
 
 
-Route::get('technology', function () {
-    return response()->json([
-        'status' => 'success',
-        'result' => App\Models\Technology::all()
-    ]);
-});
+
