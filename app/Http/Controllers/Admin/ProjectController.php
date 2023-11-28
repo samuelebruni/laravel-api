@@ -22,7 +22,7 @@ class ProjectController extends Controller
     {
         $projects = Project::paginate(4);
 
-        return view('admin.projects.home',compact('projects'));
+        return view('admin.projects.index',compact('projects'));
     }
 
     /**
