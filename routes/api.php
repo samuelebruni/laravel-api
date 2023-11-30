@@ -6,7 +6,7 @@ use App\Models\Project;
 use App\Http\Controllers\API\ProjectController;
 use App\Http\Controllers\API\TypeController;
 use App\Http\Controllers\API\TechnologyController;
-
+use App\Http\Controllers\API\LeadController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -20,5 +20,5 @@ Route::get('type',[TypeController::class, 'index']);
 
 Route::get('technology',[TechnologyController::class, 'index']);
 
-
+Route::post('/contacts', [LeadController::class, 'store']);
 
